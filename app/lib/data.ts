@@ -5,6 +5,7 @@ import {
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
+  QuotesTable,
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
@@ -17,7 +18,7 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
 
@@ -34,7 +35,7 @@ export async function fetchLatestInvoices() {
   try {
 
     console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // await new Promise((resolve) => setTimeout(resolve, 5500));
 
     const data = await sql<LatestInvoiceRaw[]>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
@@ -59,6 +60,7 @@ export async function fetchCardData() {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
     // how to initialize multiple queries in parallel with JS.
+    // await new Promise((resolve) => setTimeout(resolve, 5500));
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
     const invoiceStatusPromise = sql`SELECT
@@ -122,6 +124,62 @@ export async function fetchFilteredInvoices(
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoices.');
+  }
+}
+
+export async function filteredQuotes(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const quotes = await sql<QuotesTable[]>`
+      SELECT
+        quotes.id,
+        quotes.amount,
+        quotes.date,
+        quotes.status,
+        customers.name,
+        customers.email,
+        customers.image_url
+      FROM quotes
+      JOIN customers ON quotes.customer_id = customers.id
+      WHERE
+        customers.name ILIKE ${`%${query}%`} OR
+        customers.email ILIKE ${`%${query}%`} OR
+        quotes.amount::text ILIKE ${`%${query}%`} OR
+        quotes.date::text ILIKE ${`%${query}%`} OR
+        quotes.status ILIKE ${`%${query}%`}
+      ORDER BY quotes.date DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+
+    return quotes;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch quotes.');
+  }
+}
+
+export async function fetchQuotesPages(query: string) {
+  try {
+    const data = await sql`SELECT COUNT(*)
+    FROM quotes
+    JOIN customers ON quotes.customer_id = customers.id
+    WHERE
+      customers.name ILIKE ${`%${query}%`} OR
+      customers.email ILIKE ${`%${query}%`} OR
+      quotes.amount::text ILIKE ${`%${query}%`} OR
+      quotes.date::text ILIKE ${`%${query}%`} OR
+      quotes.status ILIKE ${`%${query}%`}
+  `;
+
+    const totalPages = Math.ceil(Number(data[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of invoices.');
   }
 }
 
@@ -190,7 +248,7 @@ export async function fetchCustomers() {
 
 export async function fetchFilteredCustomers(query: string) {
 
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  // await new Promise((resolve) => setTimeout(resolve, 1500));
 
   try {
     const data = await sql<CustomersTableType[]>`

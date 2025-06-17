@@ -116,7 +116,7 @@ export async function updateInvoice(id: string, prevState: State,
 
 export async function deleteInvoice(id: string) {
   // Uncomment the following lines to actually delete the invoice
-  throw new Error('Failed to Delete Invoice'); // Simulating an error for testing purposes
+  //throw new Error('Failed to Delete Invoice'); // Simulating an error for testing purposes
 
   await sql`DELETE FROM invoices WHERE id = ${id}`;
   revalidatePath('/dashboard/invoices');
