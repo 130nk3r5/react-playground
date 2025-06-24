@@ -173,7 +173,7 @@ export default function Home() {
       <hr className="my-8 border-gray-600" />
 
       <section>
-        <h2 className="text-2xl text-white mb-2">📫 Need Help?</h2>
+        <h2 className="text-2xl text-green mb-2">📫 Need Help?</h2>
         <p><em><strong>Talk to a senior</strong></em></p>
 
         <p className="mt-4 text-green-400">
