@@ -83,7 +83,7 @@ export default function Home() {
       <hr className="my-8 border-gray-600" />
 
       <section>
-        <h2 className="text-2xl text-teal-300 mb-2">🛠 What You'll Need</h2>
+        <h2 className="text-2xl text-teal-300 mb-2">🛠 What You&apos;ll Need</h2>
         <ul className="list-disc ml-6 space-y-1">
           <li>Your coding skills ⚙️</li>
           <li>A language of your choice (Python, C#, JavaScript, etc.)</li>
