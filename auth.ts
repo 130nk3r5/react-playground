@@ -42,3 +42,27 @@ export const { auth, signIn, signOut } = NextAuth({
     }),
   ],
 });
+
+export async function createUser(email: string, password: string): Promise<true | string> {
+  // Check if user already exists
+  const existing = await sql`
+    SELECT id FROM users WHERE email = ${email}
+  `;
+  if (existing.length > 0) {
+    return 'A user with this email already exists.';
+  }
+
+  // Hash password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Insert user
+  try {
+    await sql`
+      INSERT INTO users (email, password, name)
+      VALUES (${email}, ${hashedPassword}, ${email})
+    `;
+    return true;
+  } catch (error) {
+    return 'Failed to create user.';
+  }
+}

@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import postgres from 'postgres';
-import { signIn } from '@/auth';
+import { signIn, createUser } from '@/auth';
 import { AuthError } from 'next-auth';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
@@ -139,4 +139,35 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+const RegisterSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+export async function registerUser(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  const email = formData.get('email');
+  const password = formData.get('password');
+  const redirectTo = formData.get('redirectTo') as string | undefined;
+
+  // Validate input
+  const result = RegisterSchema.safeParse({ email, password });
+  if (!result.success) {
+    return result.error.errors[0].message;
+  }
+
+  // Use the shared createUser function from auth.ts
+  const createResult = await createUser(email as string, password as string);
+  if (typeof createResult === 'string') {
+    return createResult; // error message
+  }
+
+  if (redirectTo) {
+    redirect(redirectTo);
+  }
+  return undefined;
 }

@@ -79,6 +79,44 @@ async function seedQuotes() {
   return insertedQuotes;
 }
 
+async function seedChallenges() {
+  await sql`
+      CREATE TABLE IF NOT EXISTS challenges (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        challenge_number INT NOT NULL,
+        challenge text NOT NULL,
+        answer1 VARCHAR(255) NOT NULL,
+        answer2 VARCHAR(255) NOT NULL
+      );
+    `;
+
+  //  const insertedChallenges = await Promise.all(
+  //   challenges.map(
+  //     (challenge) => sql`
+  //       INSERT INTO challenges (id, challenge_number, challenge, answer1, answer2)
+  //       VALUES (${challenge.id}, ${challenge.challenge_number}, ${challenge.challenge}, ${challenge.answer1}, ${challenge.answer2})
+  //       ON CONFLICT (id) DO NOTHING;
+  //     `,
+  //   ),
+  // );
+
+  // return insertedChallenges;
+}
+
+async function createUserAnswers() {
+  await sql`
+    CREATE TABLE IF NOT EXISTS user_answers (
+      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+      user_id UUID NOT NULL,
+      challenge_id UUID NOT NULL,
+      answer1 BOOLEAN NULL,
+      answer1_date TIMESTAMP NOT NULL,
+      answer2 BOOLEAN NULL,
+      answer2_date TIMESTAMP NOT NULL
+    );
+  `;
+}
+
 async function seedCustomers() {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
@@ -132,7 +170,9 @@ export async function GET() {
       // seedCustomers(),
       // seedInvoices(),
       // seedRevenue(),
-      seedQuotes(),
+      //seedQuotes(),
+      seedChallenges(),
+      //createUserAnswers()
     ]);
 
     return Response.json({ message: 'Database seeded successfully' });

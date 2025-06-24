@@ -7,6 +7,7 @@ import {
   LatestInvoiceRaw,
   QuotesTable,
   Revenue,
+  Challenge
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -279,5 +280,26 @@ export async function fetchFilteredCustomers(query: string) {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchChallengeById(challenge_number: string): Promise<Challenge> {
+  try {
+    const data = await sql<Challenge[]>`
+      SELECT
+        id,
+        challenge_number,
+        challenge,
+        answer1,
+        answer2,
+        input
+      FROM challenges
+      WHERE challenge_number = ${challenge_number};
+    `;
+
+    return data[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch challenge.');
   }
 }

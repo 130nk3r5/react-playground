@@ -97,3 +97,12 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export type Challenge = {
+  id: string;
+  challenge_number: number;
+  challenge: string;
+  answer1: string;
+  answer2: string;
+  input: string;
+}
