@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -59,19 +60,20 @@ export default function Home() {
           </thead>
           <tbody>
             <tr>
-              <td className="p-2 border border-gray-700"><a className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/1">Problem 1</a></td>
+              <td className="p-2 border border-gray-700">
+                <Link className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/1">Problem 1</Link></td>
               <td className="p-2 border border-gray-700">Treasure Map Calibration</td>
             </tr>
             <tr>
-              <td className="p-2 border border-gray-700"><a className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/2">Problem 2</a></td>
+              <td className="p-2 border border-gray-700"><Link className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/2">Problem 2</Link></td>
               <td className="p-2 border border-gray-700">Cube Conundrum</td>
             </tr>
             <tr>
-              <td className="p-2 border border-gray-700"><a className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/3">Problem 3</a></td>
+              <td className="p-2 border border-gray-700"><Link className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/3">Problem 3</Link></td>
               <td className="p-2 border border-gray-700">Gear Ratios</td>
             </tr>
             <tr>
-              <td className="p-2 border border-gray-700"><a className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/4">Problem 4</a></td>
+              <td className="p-2 border border-gray-700"><Link className="text-blue-600 underline hover:text-blue-800 cursor-pointer" href="/dashboard/challenge/4">Problem 4</Link></td>
               <td className="p-2 border border-gray-700">Scratchcards & Redeeming</td>
             </tr>
           </tbody>
