@@ -39,7 +39,7 @@ export default function Home() {
         <h2 className="text-2xl text-pink-400 mb-2">🧱 Overview</h2>
         <p>
           The mines are deep. The mobs are restless. The Redstone circuits are on the fritz.  
-          It's up to <strong>you</strong> to solve a series of programming puzzles scattered throughout the pixelated realm.
+          It&apos;s up to <strong>you</strong> to solve a series of programming puzzles scattered throughout the pixelated realm.
         </p>
         <p className="mt-2">
           🕹 Each challenge is a standalone coding problem, ranging from logic puzzles to string manipulation to simulation challenges – all Minecraft-themed to keep things fun and immersive!

@@ -19,13 +19,6 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     challenge = await fetchChallengeById(challengeId);
   }
 
-  // Copy-to-clipboard handler (client-side only)
-  function handleCopyInput() {
-    if (challenge?.input) {
-      navigator.clipboard.writeText(challenge.input);
-    }
-  }
-
   return (
     <main>
       {challenge?.challenge ? (
