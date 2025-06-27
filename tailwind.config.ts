@@ -27,6 +27,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'), // Add typography plugin for prose class
+  ],
 };
 export default config;
