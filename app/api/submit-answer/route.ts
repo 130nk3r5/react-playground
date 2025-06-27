@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import postgres from 'postgres';
 import { auth } from '@/auth'; // This is your NextAuth handler (from auth.ts or auth.js)
-import { authConfig } from '@/auth.config';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 

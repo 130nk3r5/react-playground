@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 export default function AnswerForm({ challengeId }: { challengeId: string }) {
   const [answer1, setAnswer1] = useState('');
   const [answer2, setAnswer2] = useState('');
-  const [submitted1, setSubmitted1] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [answer1Correct, setAnswer1Correct] = useState(false);
   const [answer2Correct, setAnswer2Correct] = useState(false);
