@@ -5,6 +5,8 @@ import rehypeRaw from 'rehype-raw';
 import React from "react";
 import { Challenge } from "@/app/lib/definitions";
 import InputSection from "@/app/ui/challenge/input-section";
+import AnswerForm from "@/app/ui/challenge/answer-form";
+
 
 export const metadata: Metadata = {
   title: 'Challenge Details',
@@ -26,6 +28,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           <ReactMarkdown rehypePlugins={[rehypeRaw]}>
             {challenge.challenge}
           </ReactMarkdown>
+          {/* --- Answer Form goes here --- */}
+          <AnswerForm challengeId={challengeId} />
           {challenge.input && <InputSection input={challenge.input} />}
         </>
       ) : (

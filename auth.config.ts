@@ -1,3 +1,4 @@
+import Credentials from "next-auth/providers/credentials";
 import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
@@ -17,6 +18,19 @@ export const authConfig = {
       }
       return true;
     },
+    async session({ session, token, user }) {
+      // If using JWT, you may need to get id from token.sub or token.id
+      if (session.user && user?.id) {
+        session.user.id = user.id;
+      } else if (session.user && token?.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
   },
-  providers: [], // Add providers with an empty array for now
+  providers: [
+    Credentials({
+      // The authorize logic is provided in auth.ts
+    }),
+  ], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
