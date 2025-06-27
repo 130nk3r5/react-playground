@@ -24,6 +24,7 @@ export default function AnswerForm({ challengeId }: { challengeId: string }) {
       setMessage(data.answer1Correct ? "Part 1 correct!" : "Part 1 submitted, but not correct.");
       setAnswer1Correct(data.answer1Correct);
       fetchAnswers();
+      fetchScore();
     } else {
       setMessage("Failed to submit Part 1.");
     }
@@ -43,6 +44,7 @@ export default function AnswerForm({ challengeId }: { challengeId: string }) {
       setMessage(data.answer2Correct ? "Part 2 correct! 🎉" : "Part 2 submitted, but not correct.");
       setAnswer2Correct(data.answer2Correct);
       fetchAnswers();
+      fetchScore();
     } else {
       setMessage("Failed to submit Part 2.");
     }
