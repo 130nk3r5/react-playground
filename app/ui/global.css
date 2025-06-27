@@ -33,8 +33,12 @@ h3 {
   font-weight: 400;
 }
 
-p {
+main p {
   padding-bottom: 1em;
+}
+
+section p {
+   padding-bottom: 1em;
 }
 
 hr {
