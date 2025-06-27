@@ -4,7 +4,7 @@ import { auth } from '@/auth';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const session = await auth();
     const userId = session?.user?.id;
