@@ -109,10 +109,10 @@ async function createUserAnswers() {
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       user_id UUID NOT NULL,
       challenge_id UUID NOT NULL,
-      answer1 BOOLEAN NULL,
-      answer1_date TIMESTAMP NOT NULL,
-      answer2 BOOLEAN NULL,
-      answer2_date TIMESTAMP NOT NULL
+      answer1 text NULL,
+      answer1_date TIMESTAMP NULL,
+      answer2 text NULL,
+      answer2_date TIMESTAMP NULL
     );
   `;
 }
