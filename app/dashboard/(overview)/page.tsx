@@ -128,9 +128,9 @@ export default function Home() {
       <section>
         <h2 className="text-2xl text-green-300 mb-2">🏆 Scoring</h2>
         <ul className="list-disc ml-6">
-          <li>✅ Correctness: 60%</li>
-          <li>⚡️ Efficiency: 20%</li>
-          <li>✨ Creativity / Code style: 20%</li>
+          <li>✅ 50 points for the first person submitting</li>
+          <li>⚡️ 5 points lost for each person after that</li>
+          <li>✨ We will review your code afterwards</li>
         </ul>
         <p className="mt-2">Bonus points for:</p>
         <ul className="list-disc ml-6">
@@ -145,7 +145,7 @@ export default function Home() {
       <section>
         <h2 className="text-2xl text-pink-300 mb-2">🧑‍💻 Who Can Participate?</h2>
         <ul className="list-disc ml-6">
-          <li>Students only (high school or university)</li>
+          <li>Students only (University)</li>
           <li>Solo players only</li>
           <li>Must love Minecraft… or at least pretend to 😄</li>
         </ul>
@@ -156,18 +156,6 @@ export default function Home() {
       <section>
         <h2 className="text-2xl text-yellow-300 mb-2">🎁 Prizes</h2>
         <p>Eternal glory in the Hall of Fame (aka this repo)</p>
-      </section>
-
-      <hr className="my-8 border-gray-600" />
-
-      <section>
-        <h2 className="text-2xl text-cyan-300 mb-2">📣 Tips for Success</h2>
-        <ul className="list-disc ml-6">
-          <li>Think before you code: understand the problem first!</li>
-          <li>Test your code with sample and edge cases</li>
-          <li>Use Git early and often</li>
-          <li>Have fun! This is your time to <strong>craft code like a pro</strong> 🧠🪓</li>
-        </ul>
       </section>
 
       <hr className="my-8 border-gray-600" />
