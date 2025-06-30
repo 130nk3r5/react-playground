@@ -34,7 +34,6 @@ function ConfettiBurst() {
 export default function AnswerForm({ challengeId }: { challengeId: string }) {
   const [answer1, setAnswer1] = useState('');
   const [answer2, setAnswer2] = useState('');
-  const [score, setScore] = useState<number | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [answer1Correct, setAnswer1Correct] = useState(false);
   const [answer2Correct, setAnswer2Correct] = useState(false);
@@ -76,7 +75,6 @@ export default function AnswerForm({ challengeId }: { challengeId: string }) {
         setTimeout(() => setShake1(false), 600);
       }
       fetchAnswers();
-      fetchScore();
     } else {
       setMessage("Failed to submit Part 1.");
       setMessageType('error');
@@ -114,7 +112,6 @@ export default function AnswerForm({ challengeId }: { challengeId: string }) {
         setTimeout(() => setShake2(false), 600);
       }
       fetchAnswers();
-      fetchScore();
     } else {
       setMessage("Failed to submit Part 2.");
       setMessageType('error');
@@ -139,25 +136,13 @@ export default function AnswerForm({ challengeId }: { challengeId: string }) {
     }
   }
 
-  async function fetchScore() {
-    const res = await fetch(`/api/get-score`);
-    if (res.ok) {
-      const data = await res.json();
-      if (data.score !== undefined && data.score !== null) {
-        setScore(data.score);
-      }
-    }
-  }
-
   useEffect(() => {
     fetchAnswers();
-    fetchScore();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [challengeId]);
 
   return (
     <section className="mb-8" style={{ position: "relative" }}>
-      <h3>Current Score: {score}</h3>
       <h3 className="font-bold mb-2">Submit or update your answers</h3>
       {message && (
         <div

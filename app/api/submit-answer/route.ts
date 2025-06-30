@@ -41,7 +41,8 @@ export async function POST(req: NextRequest) {
 
     console.log('Existing answers:', existing);
 
-    const now = new Date();
+    // Use UTC ISO string for now
+    const now = new Date().toISOString();
     let answer1Correct = false;
     let answer2Correct = false;
     answer1Correct = part === 1 && answer === challenge[0].answer1;

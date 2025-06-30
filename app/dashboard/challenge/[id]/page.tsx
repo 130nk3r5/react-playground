@@ -6,7 +6,7 @@ import React from "react";
 import { Challenge } from "@/app/lib/definitions";
 import InputSection from "@/app/ui/challenge/input-section";
 import AnswerForm from "@/app/ui/challenge/answer-form";
-import ScoreDisplay from "./ScoreDisplay";
+import AllScoresPage from "../../all-scores/page";
 
 
 export const metadata: Metadata = {
@@ -35,8 +35,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         </>
       ) : (
         <div style={{ textAlign: "center", marginTop: "2rem" }}>
-          <h2>🎉 You have reached the end of the challenges!</h2>
-          <ScoreDisplay />
+          <AllScoresPage />
         </div>
       )}
     </main>
